@@ -1,0 +1,20 @@
+%Machine Problem 1
+%Used Looping Statements such as FOR and WHILE loop.
+X = 10; 
+for n = 0:1:99
+    if n <= 9
+        stem(n, ((n^2)-7)); hold on;
+    else
+        i = 1; Y = n;
+        while i == 1
+            Y = Y - 10;
+            if Y < 10
+            stem(Y + X, ((Y^2)-7)); % Plotting command stem(x,y) command is used, to get the graph. 
+            hold on;
+            i = 0;
+            end
+            X = X + 10;
+        end
+        X = 10;
+    end
+end
