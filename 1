@@ -18,3 +18,116 @@ for n = 0:1:99
         X = 10;
     end
 end
+
+----------------
+
+MACHINE PROBLEM 2
+
+%Machine Problem 2
+%First Point
+x1 = input('Enter ("X",y) of 1st point: ');
+y1 = input('Enter (x,"Y") of 1st point: ');
+%Second Point
+x2 = input('Enter ("X",y) of 2nd point: ');
+y2 = input('Enter (x,"Y") of 2nd point: ');
+%Third Point
+x3 = input('Enter ("X",y) at 3rd point: ');
+y3 = input('Enter (x,"Y") of 3rd point: ');
+%EQUATIONS TO GET THE CIRCLE
+a = [x1,y1,1; x2,y2,1; x3,y3,1];
+d = [((x1^2)+(y1^2)),y1,1; ((x2^2)+(y2^2)),y2,1; ((x3^2)+(y3^2)),y3,1];
+e = [((x1^2)+(y1^2)),x1,1; ((x2^2)+(y2^2)),x2,1; ((x3^2)+(y3^2)),x3,1];
+f = [((x1^2)+(y1^2)),x1,y1; ((x2^2)+(y2^2)),x2,y2; ((x3^2)+(y3^2)),x3,y3];
+%Commands used below were det(A), determinant, dealing with matrices. 
+A = det(a);
+d1 = -det(d);
+e1 = det(e);
+f1 = -det(f);
+
+h = round(((-d1)/(2*A)),2);% We also used Math Commands, such as round(). 
+k = round(((-e1)/(2*A)),2);
+
+r = round((sqrt(((d1^2)+(e1^2)-(4*A*f1))/(4*(A^2)))),2); %Radius
+D = round((d1/A),2);
+E = round((e1/A),2);
+F = round((f1/A),2);
+
+c = [h,k]; %Center
+v = [D,E,F]; %Vector
+
+disp('Center: '); 
+disp(c);
+
+disp('Radius: ');
+disp(r);
+
+disp('Vector: ');
+disp(v);
+
+
+MACHINE PROBLEM 3
+--
+
+
+MACHINE PROBLEM 4
+
+%Machine Problem 4
+%Variables
+hi = input('Enter initial height of the projectile above the ground in meters: ');
+Vo = input('Enter magnitude of the velocity in m/s: ');
+angle = input('Enter angle in degrees with respect to the +?-axis at which the projectile is fired: ');
+ax = input('Enter x-component of the acceleration in m/s^2: ');
+ay = input('Enter y-component of the acceleration in m/s^2: ');
+
+%Error Code, Used IF Statements
+if ay == 0 
+    error('Error! Vertical acceleration is zero, there would be no free fall.')
+end    
+angle = angle.*(pi./180); % Angle Fomula
+    
+FinT = (-Vo.*sin(angle)+ sqrt((Vo.*sin(angle)).^2-2.*ay.*hi))/ay; %Final Time
+    
+t= linspace(0,FinT);%Time
+    
+if FinT <= 0 % IF Statements
+    FinT = (-Vo.*sin(angle)-(sqrt((Vo.*sin(angle)).^2)-2.*ay.*hi))./ay;
+    
+    t= linspace(0,FinT);
+    
+    x = Vo.*cos(angle).*(t) + 1./2.*ax.*(t).^2; %Formula, Solving for x
+    y = Vo.*sin(angle).*(t) + 1./2.*(-ay).*(t).^2; %Formula, Solving for y
+else
+    x = Vo.*cos(angle).*(t) + (1./2).*ax.*(t); %Formula, Solving for x
+    y = Vo.*sin(angle).*(t) + (1./2).*(-ay).*(t); %Formula, Solving for y
+        
+end
+%Plotting Codes For The Graph
+plot(x,y,'-.ro','linewidth',0.5); xlabel('Distance'); ylabel('Height'); grid on; title('MP4')
+
+----------------
+
+MACHINE PROBLEM 5
+
+%Machine Problem 5
+%For x(n)
+n = 0:199;
+x = input('Enter x(n): ');plot(n,x,'-.ro');hold on;
+
+%For y(n), used FOR loop
+for z = 1:200
+    if z == 1
+        y = -1.5.*x(z) + 2.*x(z+1) - 0.5.*x(z+2);
+        plot(z,y,'*');
+    end
+    if z > 1 && z <= 199
+        y = 0.5.*x(z+1) - 0.5.*x(z-1);
+        plot(z,y,'*');
+    end
+    if z ==200    
+        y = 1.5.*x(z) - 2.*x(z-1) + 0.5.*x(z-2);
+        plot(z,y,'*');
+    end
+end
+%Adding Legends and other plot commands just for accuracy. 
+legend('x','y'); xlabel('x-axis'); ylabel('y-axis'); grid on
+
